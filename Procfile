@@ -1,1 +1,1 @@
-worker: gunicorn main.wsgi
+worker: python main.py
