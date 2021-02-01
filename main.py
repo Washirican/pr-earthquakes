@@ -33,10 +33,11 @@ for eq_dict in all_eq_dicts:
         magnitudes.append(eq_dict['properties']['mag'])
         longitudes.append(eq_dict['geometry']['coordinates'][0])
         latitudes.append(eq_dict['geometry']['coordinates'][1])
-        hover_texts.append(eq_dict['properties']['title'])
+        # hover_texts.append(eq_dict['properties']['title'])
 
-        # TODO (D. Rodriguez 2021-01-31): Add link to earthquake details page.
-        # hover_texts.append(eq_details_url)
+        # TODO (D. Rodriguez 2021-01-31): Make link work.
+        #  Reference https://www.youtube.com/watch?v=7R7VMSLwooo&feature=youtu.be&ab_channel=CharmingData
+        hover_texts.append(f"<a href={eq_details_url}>{eq_dict['properties']['title']}</a>")
 #
 # This should not be public!
 mapbox_access_token = 'pk.eyJ1Ijoid2FzaGlyaWNhbiIsImEiOiJja2gyeG9kdWUxYXJoMnJybmlweXg2aTRiIn0.AnaSkQ6ZFXEHsd4kWYoQxw'  # open(".mapbox_token").read()
