@@ -27,12 +27,17 @@ for eq_dict in all_eq_dicts:
 
     # Filter for Puerto Rico in earthquake title
     if 'Puerto Rico' in eq_dict['properties']['title']:
-        # Refactor to use values directly and not saving to temporary variables
+        eq_id = eq_dict['id']
+        eq_details_url = f'https://earthquake.usgs.gov/earthquakes/eventpage/{eq_id}/executive'
+
         magnitudes.append(eq_dict['properties']['mag'])
         longitudes.append(eq_dict['geometry']['coordinates'][0])
         latitudes.append(eq_dict['geometry']['coordinates'][1])
         hover_texts.append(eq_dict['properties']['title'])
 
+        # TODO (D. Rodriguez 2021-01-31): Add link to earthquake details page.
+        # hover_texts.append(eq_details_url)
+#
 # This should not be public!
 mapbox_access_token = 'pk.eyJ1Ijoid2FzaGlyaWNhbiIsImEiOiJja2gyeG9kdWUxYXJoMnJybmlweXg2aTRiIn0.AnaSkQ6ZFXEHsd4kWYoQxw'  # open(".mapbox_token").read()
 
