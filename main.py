@@ -51,7 +51,7 @@ fig = go.Figure(go.Scattermapbox(
                 {
                     'size': [5 * magnitude for magnitude in magnitudes],
                     'color': magnitudes,
-                    'colorscale': 'Viridis',
+                    'colorscale': 'hot',
                     'reversescale': True,
                     'colorbar': {'title': 'Magnitude'},
                     }
