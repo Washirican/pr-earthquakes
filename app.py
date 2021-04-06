@@ -8,9 +8,11 @@ import plotly.graph_objs as go
 from plotly import offline
 from utils import get_earthquakes
 
+# TODO (D. Rodriguez 2021-04-06): refactor imports
 app = Flask(__name__)
 
 
+# TODO (D. Rodriguez 2021-04-06): Refactor code
 def create_figure(recent_eq_data):
     # fig = Figure()
     # axis = fig.add_subplot(1, 1, 1)
@@ -18,6 +20,7 @@ def create_figure(recent_eq_data):
     # ys = [random.randint(1, 50) for x in xs]
     # axis.plot(xs, ys)
 
+    # TODO (D. Rodriguez 2021-04-06): Hide this in Env Variable
     mapbox_access_token = 'pk.eyJ1Ijoid2FzaGlyaWNhbiIsImEiOiJja2gyeG9kdWUxYXJoMnJybmlweXg2aTRiIn0.AnaSkQ6ZFXEHsd4kWYoQxw'  # open(".mapbox_token").read()
 
     # Get chart title from json data
@@ -81,6 +84,9 @@ def create_figure(recent_eq_data):
     return fig
 
 
+# TODO (D. Rodriguez 2021-04-06): Add Home route with details about page
+# TODO (D. Rodriguez 2021-04-06): Add user input for search parameters
+#  (timeframe and magnitude)
 @app.route('/', methods=['GET', 'POST'])
 def index():
     request_url = 'https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/' \
@@ -99,6 +105,7 @@ def index():
     return render_template('puerto_rico_earthquakes.html')
 
 
+# TODO (D. Rodriguez 2021-04-06): Add map template and route.
 # @app.route('/plot.png')
 # def plot_png():
 #     fig = create_figure()
