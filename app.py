@@ -76,7 +76,7 @@ def create_figure(recent_eq_data):
                     )
             )
 
-    offline.plot(fig, filename='templates/puerto_rico_earthquakes.html')
+    # offline.plot(fig, filename='templates/puerto_rico_earthquakes.html')
 
     return fig
 
@@ -88,13 +88,14 @@ def index():
 
     recent_eq_data = get_earthquakes(request_url)
 
-    create_figure(recent_eq_data)
+    fig = create_figure(recent_eq_data)
+    offline.plot(fig, filename='templates/puerto_rico_earthquakes.html')
+
     #
     # output = io.BytesIO()
     # FigureCanvas(fig).print_png(output)
     # return Response(output.getvalue(), mimetype='image/png')
-    #
-    #
+
     return render_template('puerto_rico_earthquakes.html')
 
 
