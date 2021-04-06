@@ -1,6 +1,14 @@
 import requests
+import json
 
 
-def count_words_at_url(url):
-    resp = requests.get(url)
-    return len(resp.text.split())
+def get_earthquakes(url):
+    errors = []
+
+    try:
+        response = requests.get(url)
+        recent_eq_data = response.json()
+        return recent_eq_data
+    except:
+        errors.append('Unable to get URL.')
+        return {'error': errors}
