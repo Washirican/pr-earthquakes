@@ -78,7 +78,8 @@ def create_figure(recent_eq_data):
                     zoom=8.5,
                     )
             )
-
+    # TODO (D. Rodriguez 2021-04-09): Create image in html page and have
+    #  flask route render it.
     # offline.plot(fig, filename='templates/puerto_rico_earthquakes.html')
 
     return fig
