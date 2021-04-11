@@ -80,9 +80,10 @@ def create_figure(recent_eq_data):
             )
     # TODO (D. Rodriguez 2021-04-09): Create image in html page and have
     #  flask route render it.
-    # offline.plot(fig, filename='templates/puerto_rico_earthquakes.html')
+    filename = 'recent_earthquakes.html'
+    offline.plot(fig, filename=f'templates/{filename}')
 
-    return fig
+    return filename
 
 
 # TODO (D. Rodriguez 2021-04-06): Add Home route with details about page
@@ -95,15 +96,15 @@ def index():
 
     recent_eq_data = get_earthquakes(request_url)
 
-    fig = create_figure(recent_eq_data)
-    offline.plot(fig, filename='templates/puerto_rico_earthquakes.html')
+    filename = create_figure(recent_eq_data)
+    # offline.plot(fig, filename='templates/puerto_rico_earthquakes.html')
 
     #
     # output = io.BytesIO()
     # FigureCanvas(fig).print_png(output)
     # return Response(output.getvalue(), mimetype='image/png')
 
-    return render_template('puerto_rico_earthquakes.html')
+    return render_template(filename)
 
 
 # TODO (D. Rodriguez 2021-04-06): Add map template and route.
