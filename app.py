@@ -1,5 +1,6 @@
 import os
 import io
+import datetime
 
 from flask import Flask, render_template, request, Response
 from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
@@ -25,6 +26,9 @@ def create_figure(recent_eq_data):
 
     # Get chart title from json data
     title = recent_eq_data['metadata']['title']
+    data_date = datetime.datetime.fromtimestamp(recent_eq_data['metadata']['generated'] / 1e3)
+
+    header = f"{title} (Data from {data_date.strftime('%m/%d/%Y, %H:%M:%S')})"
 
     # Extract earthquake dictionaries from json data
     all_eq_dicts = recent_eq_data['features']
@@ -45,8 +49,13 @@ def create_figure(recent_eq_data):
 
             # TODO (D. Rodriguez 2021-01-31): Make link work.
             #  Reference https://www.youtube.com/watch?v=7R7VMSLwooo&feature=youtu.be&ab_channel=CharmingData
-            hover_texts.append(
-                    f"<a href={eq_details_url}>{eq_dict['properties']['title']}</a>")
+            eq_date = datetime.datetime.fromtimestamp(eq_dict['properties']['time'] / 1e3)
+
+            # hover_texts.append(
+            #         f"<a href={eq_details_url} style='color: black'>{eq_dict['properties']['title']}-{eq_date}</a>")
+            hover_texts.append(f"{eq_dict['properties']['title']}<br />"
+                               f"{eq_date.strftime('%m/%d/%Y, %H:%M:%S')}<br />")
+
 
     fig = go.Figure(go.Scattermapbox(
             lon=longitudes,
@@ -56,7 +65,7 @@ def create_figure(recent_eq_data):
                     {
                         'size': [5 * magnitude for magnitude in magnitudes],
                         'color': magnitudes,
-                        'colorscale': 'Viridis',
+                        'colorscale': 'sunset',
                         'reversescale': True,
                         'colorbar': {'title': 'Magnitude'},
                         }
@@ -64,7 +73,7 @@ def create_figure(recent_eq_data):
             ))
 
     fig.update_layout(
-            title_text=title,
+            title_text=header,
             hovermode='closest',
             mapbox_style='carto-positron',
             mapbox=dict(
