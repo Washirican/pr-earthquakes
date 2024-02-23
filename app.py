@@ -129,6 +129,7 @@ def index():
 #     FigureCanvas(fig).print_png(output)
 #     return Response(output.getvalue(), mimetype='image/png')
 
-
+# FIXME (2024-02-23): When running it open 2 browser windows?
+# LEARN (2024-02-23): Figure out why this is happening
 if __name__ == '__main__':
     app.run(debug=False)
