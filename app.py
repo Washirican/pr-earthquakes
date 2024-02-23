@@ -1,20 +1,24 @@
-import os
-import io
+"""
+Plot earthquake data from US Geological survey.
+"""
 import datetime
+import io
+import os
 
-from flask import Flask, render_template, request, Response
+import plotly.graph_objs as go
+from flask import Flask, Response, render_template, request
 from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
 from matplotlib.figure import Figure
-import plotly.graph_objs as go
 from plotly import offline
+
 from utils import get_earthquakes
 
-# TODO (D. Rodriguez 2021-04-06): refactor imports
 app = Flask(__name__)
 
 
 # TODO (D. Rodriguez 2021-04-06): Refactor code
 def create_figure(recent_eq_data):
+    """Create plot."""
     # fig = Figure()
     # axis = fig.add_subplot(1, 1, 1)
     # xs = range(100)
@@ -51,8 +55,8 @@ def create_figure(recent_eq_data):
             #  Reference https://www.youtube.com/watch?v=7R7VMSLwooo&feature=youtu.be&ab_channel=CharmingData
             eq_date = datetime.datetime.fromtimestamp(eq_dict['properties']['time'] / 1e3)
 
-            # hover_texts.append(
-            #         f"<a href={eq_details_url} style='color: black'>{eq_dict['properties']['title']}-{eq_date}</a>")
+        #     hover_texts.append(
+        #             f"<a href={eq_details_url} style='color: black'>{eq_dict['properties']['title']}-{eq_date}</a>")
             hover_texts.append(f"{eq_dict['properties']['title']}<br />"
                                f"{eq_date.strftime('%m/%d/%Y, %H:%M:%S')}<br />")
 
@@ -100,6 +104,7 @@ def create_figure(recent_eq_data):
 #  (timeframe and magnitude)
 @app.route('/', methods=['GET', 'POST'])
 def index():
+    """App index page."""
     request_url = 'https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/' \
               '2.5_week.geojson'
 
