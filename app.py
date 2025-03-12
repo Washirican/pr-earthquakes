@@ -26,7 +26,7 @@ def create_figure(recent_eq_data):
     # axis.plot(xs, ys)
 
     # TODO (D. Rodriguez 2021-04-06): Hide this in Env Variable
-    mapbox_access_token = 'pk.eyJ1Ijoid2FzaGlyaWNhbiIsImEiOiJja2gyeG9kdWUxYXJoMnJybmlweXg2aTRiIn0.AnaSkQ6ZFXEHsd4kWYoQxw'  # open(".mapbox_token").read()
+    mapbox_access_token = 'pk.eyJ1Ijoid2FzaGlyaWNhbiIsImEiOiJjbTg2amtmN2IwNTM3MnJwc21mZTIxc3BnIn0.6IJohEOeXBZyDFWZpBlODw'  # open(".mapbox_token").read()
 
     # Get chart title from json data
     title = recent_eq_data['metadata']['title']
@@ -129,7 +129,7 @@ def index():
 #     FigureCanvas(fig).print_png(output)
 #     return Response(output.getvalue(), mimetype='image/png')
 
-# FIXME (2024-02-23): When running it open 2 browser windows?
+# FIXME (2024-02-23): When running it opens 2 browser windows
 # LEARN (2024-02-23): Figure out why this is happening
 if __name__ == '__main__':
     app.run(debug=False)
